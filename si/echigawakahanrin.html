@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PHQDMSCVJK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PHQDMSCVJK');
+    </script>
     <meta charset="utf-8">
     <title>echigawakahanrin</title>
     <meta name="description" content="360&deg; Image - A-Frame">
     <script src="./dist/aframe-master.js"></script>
   </head>
   <body>
-    <a-scene>
+    <a-scene vr-mode-ui="enabled: false">
        <a-sky src="./img/si_echigawakahanrin.JPG"></a-sky>
     </a-scene>
   </body>
