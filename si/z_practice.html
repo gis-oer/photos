@@ -37,6 +37,7 @@
     </a-scene>
     <div id="controls">
       <button id="zoomin">+</button>
+      <button id="map">map</button>
       <button id="zoomout">−</button>
     </div>
 
@@ -53,6 +54,12 @@
         fov = Math.min(100, fov + 5); // ZoomOut
         camera.setAttribute('camera', 'fov', fov);
       });
+
+      document.getElementById('map').addEventListener('click', function() {
+        const url = 'https://maps.gsi.go.jp/#15/35.016411/135.734111/'
+        window.open(url, '_blank')
+      });
+
     </script>
 
   </body>
