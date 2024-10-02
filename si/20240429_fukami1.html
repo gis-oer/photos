@@ -2,22 +2,73 @@
 <html>
   <head>
     <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PHQDMSCVJK"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PHQDMSCVJK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    gtag('config', 'G-PHQDMSCVJK');
-  </script>
+      gtag('config', 'G-PHQDMSCVJK');
+    </script>
     <meta charset="utf-8">
     <title>20240429_fukami1</title>
     <meta name="description" content="360&deg; Image - A-Frame">
     <script src="./dist/aframe-master.js"></script>
+    <style>
+
+    html {
+  touch-action: manipulation;
+    }
+
+    #controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+    }
+
+    #controls button {
+      font-size: 3vw;
+      padding: 1vw 2vw;
+      margin: 1vw;
+    }
+
+  </style>
   </head>
   <body>
     <a-scene vr-mode-ui="enabled: false">
-       <a-sky src="./img/si_20240429_fukami1.JPG"></a-sky>
+      <a-sky src="./img/si_20240429_fukami1.JPG"></a-sky>
+      <a-camera id="camera" look-controls="enabled: true"></a-camera>
     </a-scene>
+    <div id="controls">
+      <button id="zoomin">+</button>
+      <button id="map">Map</button>
+      <button id="zoomout">−</button>
+    </div>
+
+    <script>
+      const camera = document.querySelector('#camera');
+      let fov = camera.getAttribute('camera').fov;
+
+      document.getElementById('zoomin').addEventListener('click', function() {
+        fov = Math.max(10, fov - 5); // ZoomIn
+        camera.setAttribute('camera', 'fov', fov);
+      });
+
+      document.getElementById('zoomout').addEventListener('click', function() {
+        fov = Math.min(100, fov + 5); // ZoomOut
+        camera.setAttribute('camera', 'fov', fov);
+      });
+
+      document.getElementById('map').addEventListener('click', function() {
+        const url = 'https://maps.gsi.go.jp/#16/37.30493/136.72572/'
+        window.open(url, '_blank')
+      });
+
+    </script>
+
   </body>
 </html>

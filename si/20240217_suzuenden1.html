@@ -14,10 +14,61 @@
     <title>20240217_suzuenden1</title>
     <meta name="description" content="360&deg; Image - A-Frame">
     <script src="./dist/aframe-master.js"></script>
+    <style>
+
+    html {
+  touch-action: manipulation;
+    }
+
+    #controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+    }
+
+    #controls button {
+      font-size: 3vw;
+      padding: 1vw 2vw;
+      margin: 1vw;
+    }
+
+  </style>
   </head>
   <body>
     <a-scene vr-mode-ui="enabled: false">
-       <a-sky src="./img/si_20240217_suzuenden1.JPG"></a-sky>
+      <a-sky src="./img/si_20240217_suzuenden1.JPG"></a-sky>
+      <a-camera id="camera" look-controls="enabled: true"></a-camera>
     </a-scene>
+    <div id="controls">
+      <button id="zoomin">+</button>
+      <button id="map">Map</button>
+      <button id="zoomout">−</button>
+    </div>
+
+    <script>
+      const camera = document.querySelector('#camera');
+      let fov = camera.getAttribute('camera').fov;
+
+      document.getElementById('zoomin').addEventListener('click', function() {
+        fov = Math.max(10, fov - 5); // ZoomIn
+        camera.setAttribute('camera', 'fov', fov);
+      });
+
+      document.getElementById('zoomout').addEventListener('click', function() {
+        fov = Math.min(100, fov + 5); // ZoomOut
+        camera.setAttribute('camera', 'fov', fov);
+      });
+
+      document.getElementById('map').addEventListener('click', function() {
+        const url = 'https://maps.gsi.go.jp/#16/37.48772/137.11511/'
+        window.open(url, '_blank')
+      });
+
+    </script>
+
   </body>
 </html>
