@@ -26,40 +26,46 @@
     </style>
   </head>
   <body>
-    <a-scene vr-mode-ui="enabled: false">
-      <a-sky src="./img/si_kyodogawa.JPG"></a-sky>
-      <a-camera id="camera" look-controls="magicWindowTrackingEnabled: false"></a-camera>
-    </a-scene>
+      <a-scene vr-mode-ui="enabled: false">
+        <a-sky src="./img/si_kyodogawa.JPG"></a-sky>
+        <a-camera id="camera"
+          look-controls="
+            magicWindowTrackingEnabled: false;
+            touchEnabled: true;
+            pointerLockEnabled: false;
+            reverseMouseDrag: false;
+            touchPitchScale: 0.5;
+            touchYawScale: 0.5;">
+        </a-camera>
+      </a-scene>
 
-    <div id="controls">
-      <button id="zoomin">+</button>
-      <button id="map">Map</button>
-      <button id="zoomout">−</button>
-    </div>
+      <div id="controls">
+        <button id="zoomin">+</button>
+        <button id="map">Map</button>
+        <button id="zoomout">−</button>
+      </div>
 
-    <script>
-      const camera = document.querySelector('#camera');
+      <script>
+        const camera = document.querySelector('#camera');
 
-      // --- カメラが初期化されてからFOVを操作 ---
-      camera.addEventListener('loaded', () => {
-        let fov = camera.getAttribute('camera').fov;
+        camera.addEventListener('loaded', () => {
+          let fov = camera.getAttribute('camera').fov;
 
-        document.getElementById('zoomin').addEventListener('click', () => {
-          fov = Math.max(10, fov - 5);
-          camera.setAttribute('camera', 'fov', fov);
+          document.getElementById('zoomin').addEventListener('click', () => {
+            fov = Math.max(10, fov - 5);
+            camera.setAttribute('camera', 'fov', fov);
+          });
+
+          document.getElementById('zoomout').addEventListener('click', () => {
+            fov = Math.min(100, fov + 5);
+            camera.setAttribute('camera', 'fov', fov);
+          });
         });
 
-        document.getElementById('zoomout').addEventListener('click', () => {
-          fov = Math.min(100, fov + 5);
-          camera.setAttribute('camera', 'fov', fov);
+        document.getElementById('map').addEventListener('click', () => {
+          const url = 'https://maps.gsi.go.jp/#16/35.6438346/138.717695/';
+          window.open(url, '_blank');
         });
-      });
-
-      // --- Mapボタン ---
-      document.getElementById('map').addEventListener('click', () => {
-        const url = 'https://maps.gsi.go.jp/#16/35.6438346/138.717695/';
-        window.open(url, '_blank');
-      });
-    </script>
-  </body>
-</html>
+      </script>
+    </body>
+  </html>
